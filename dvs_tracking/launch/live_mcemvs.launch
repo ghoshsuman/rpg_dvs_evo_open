@@ -12,9 +12,9 @@
 
     <!-- <remap from="camera_info" to="/dvs/camera_info" /> -->
 
-    <param name="world_frame_id" value="/world"/>
-    <param name="dvs_bootstrap_frame_id" value="/camera_0" /> <!-- to substitute svo, change this with the frame published by your pipeline -->
-    <param name="dvs_frame_id" value="/dvs_evo" />
+    <param name="world_frame_id" value="world"/>
+    <param name="dvs_bootstrap_frame_id" value="camera_0" /> <!-- to substitute svo, change this with the frame published by your pipeline -->
+    <param name="dvs_frame_id" value="dvs0" />
 
     <!-- SVO: Comment this when using fronto-planar bootstrapping -->
     <node pkg="svo_ros" type="svo_node" name="svo" clear_params="true" output="screen" >
@@ -48,7 +48,7 @@
 	<remap from="pointcloud_local" to="/dvs_mapping/pointcloud" /> 
 	<remap from="pointcloud_global" to="/dvs_mapping/pointcloud_global" />
 	<remap from="Inverse_Depth_Map" to="/dvs_mapping/depthmap" />  
-	<remap from="pose" to="/svo/pose_cam/0"/>
+	<!--remap from="pose" to="/svo/pose_cam/0"/-->
     </node>
         
     <!-- Map expansion -->

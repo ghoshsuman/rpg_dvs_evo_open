@@ -11,9 +11,9 @@
     <remap from="events" to="$(arg events_topic)" />
     <remap from="remote_key" to="/evo/remote_key" />
 
-    <param name="world_frame_id" value="/world"/>
-    <param name="dvs_bootstrap_frame_id" value="/camera_0" />
-    <param name="dvs_frame_id" value="/dvs_evo" />
+    <param name="world_frame_id" value="world"/>
+    <param name="dvs_bootstrap_frame_id" value="camera_0" />
+    <param name="dvs_frame_id" value="dvs_evo" />
 
     <!-- <remap from="camera_info" to="/dvs/camera_info" /> -->
 

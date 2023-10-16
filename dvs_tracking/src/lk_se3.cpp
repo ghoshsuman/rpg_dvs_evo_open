@@ -1,5 +1,9 @@
 #include "dvs_tracking/lk_se3.hpp"
 
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/core/core.hpp>
+
+
 #include <glog/logging.h>
 
 #include <boost/range/irange.hpp>
@@ -126,12 +130,17 @@ void LKSE3::precomputeReferenceFrame() {
     std::shuffle(keypoints_.begin(), keypoints_.end(), g);
 
     batches_ = std::ceil(keypoints_.size() / batch_size_);
+
+//    cv::imshow("ref img", ref_img_);
+//    cv::waitKey(10);
 }
 
 void LKSE3::updateTransformation(const int offset, const int N,
                                  size_t pyr_lvl) {
     static Eigen::MatrixXf H;
     static Eigen::VectorXf Jres, dx;
+
+    cv::Mat1f debug_img(new_img_.rows, new_img_.cols, 0.0f);
 
     const cv::Mat &img = pyr_new_[pyr_lvl];
     const float *new_img = img.ptr<float>(0);
@@ -159,6 +168,8 @@ void LKSE3::updateTransformation(const int offset, const int N,
 
         Jres.noalias() += k.J * res;
         H.noalias() += k.JJt;
+
+        debug_img.at<float>(v, u) = I_new;
     }
 
     dx = H.ldlt().solve(Jres.head<6>() * scale);
@@ -178,6 +189,14 @@ void LKSE3::updateTransformation(const int offset, const int N,
 
     T_cur_ref_ *= SE3::exp(dx).matrix();
     x_ += dx;
+
+    float alpha = .2;
+    float beta = ( 1.0 - alpha );
+    cv::Mat dst;
+    cv::addWeighted(new_img_, alpha, debug_img, beta, 0.0, dst);
+    cv::namedWindow("overlay img", cv::WINDOW_NORMAL);
+    cv::imshow("overlay img", dst);
+    cv::waitKey(0);
 }
 
 void LKSE3::trackFrame() {

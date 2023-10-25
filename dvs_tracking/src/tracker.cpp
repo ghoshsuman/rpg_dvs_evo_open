@@ -194,6 +194,8 @@ void Tracker::initialize(const ros::Time& ts) {
     while (cur_ev_ + 1 < events_.size() &&
            events_[cur_ev_].ts < TF_kf_world.stamp_)
         ++cur_ev_;
+    LOG(INFO) << "latest tf stamp: "<< TF_kf_world.stamp_;
+    LOG(INFO) << "latest event stamp: " << events_[cur_ev_].ts << "id: " << cur_ev_ << " with events size" << events_.size();
 
     updateMap();
 
@@ -265,7 +267,7 @@ void Tracker::updateMap() {
 }
 
 void Tracker::clearEventQueue() {
-    static size_t event_history_size_ = 500000;
+    static size_t event_history_size_ = 5000000;
 
     if (idle_) {
         if (events_.size() > event_history_size_) {
@@ -495,6 +497,7 @@ void Tracker::estimateTrajectory() {
         drawEvents(events_.begin() + cur_ev_, events_.begin() + frame_end,
                    new_img_);
         cv::buildPyramid(new_img_, pyr_new_, pyramid_levels_);
+//        LOG(INFO) << "*****************Collecting events from "<< events_[cur_ev_].ts << " - "<< events_[frame_end].ts;
         trackFrame();
 
         T_ref_cam_ *= SE3::exp(-x_).matrix();

@@ -96,6 +96,7 @@ class LKSE3 {
         T_cur_ref_;  ///< Trasformation from reference frame to current frame
 
     Eigen::VectorXf x_ = Vector6::Zero();  ///< Twist vector <-> T_cur_ref
+    int debug_count_ = 0;
 
     /**
      * Creates a new reference frame
@@ -152,7 +153,7 @@ class LKSE3 {
      * @param N number of keypoints to consider
      * @param pyr_lvl level of the image pyramid
      */
-    void updateTransformation(const int offset, const int N, size_t pyr_lvl);
+    void updateTransformation(const int offset, const int N, size_t pyr_lvl, size_t iter);
 
     /**
      * Tracks frame updating the transformation at each pyramid_levels_ and for

@@ -1,4 +1,4 @@
-#include "dvs_tracking/lk_se3.hpp"
+﻿#include "dvs_tracking/lk_se3.hpp"
 
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/core/core.hpp>
@@ -128,7 +128,7 @@ void LKSE3::precomputeReferenceFrame() {
   static std::seed_seq seq{1, 2, 3, 4, 5};
   static std::mt19937 g(seq);
   std::shuffle(keypoints_.begin(), keypoints_.end(), g);
-//  batch_size_ = keypoints_.size();
+  //  batch_size_ = keypoints_.size();
 
   batches_ = std::ceil(keypoints_.size() / batch_size_);
 
@@ -140,8 +140,8 @@ void LKSE3::updateTransformation(const int offset, const int N,
                                  size_t pyr_lvl, size_t iter) {
   static Eigen::MatrixXf H;
   static Eigen::VectorXf Jres, dx;
-LOG(INFO) << "HEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLOOOOOOOOO";
-//  cv::Mat1f debug_img(new_img_.rows, new_img_.cols, 0.0f);
+  //  LOG(INFO) << "HEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLOOOOOOOOO";
+  //  cv::Mat1f debug_img(new_img_.rows, new_img_.cols, 0.0f);
 
   const cv::Mat &img = pyr_new_[pyr_lvl];
   const float *new_img = img.ptr<float>(0);
@@ -170,7 +170,7 @@ LOG(INFO) << "HEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLOOOOOOOOO";
       Jres.noalias() += k.J * res;
       H.noalias() += k.JJt;
 
-//      debug_img.at<float>(v, u) = I_new;
+      //      debug_img.at<float>(v, u) = I_new;
     }
 
   dx = H.ldlt().solve(Jres.head<6>() * scale);
@@ -191,33 +191,44 @@ LOG(INFO) << "HEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLOOOOOOOOO";
   T_cur_ref_ *= SE3::exp(dx).matrix();
   x_ += dx;
 
-//  float alpha = .2;
-//  float beta = ( 1.0 - alpha );
+  //  float alpha = .2;
+  //  float beta = ( 1.0 - alpha );
 
-//  cv::Mat dst;
-//  cv::cvtColor(new_img_, dst, cv::COLOR_GRAY2BGR);
-//  for (int i=0; i<debug_img.rows; i++) {
-//      for (int j=0; j<debug_img.cols; j++) {
-//          if (debug_img.at<float>(i, j)!=0)
-//            dst.at<cv::Vec3f>(i, j) = {0, 0, 1};
-//        }
-//    }
+  //  cv::Mat dst;
+  //  cv::cvtColor(new_img_, dst, cv::COLOR_GRAY2BGR);
+  //  for (int i=0; i<debug_img.rows; i++) {
+  //      for (int j=0; j<debug_img.cols; j++) {
+  //          if (debug_img.at<float>(i, j)!=0)
+  //            dst.at<cv::Vec3f>(i, j) = {0, 0, 1};
+  //        }
+  //    }
 
   //    cv::addWeighted(new_img_, alpha, debug_img, beta, 0.0, dst);
   //    cv::namedWindow("overlay img", cv::WINDOW_NORMAL);
   //    cv::imshow("overlay img", (1-dst));
   //    cv::waitKey(0);
-//  cv::imwrite("/home/suman/data/tmp/" + std::to_string(debug_count_++) + ".png", 255*dst);
+  //  cv::imwrite("/home/suman/data/tmp/" + std::to_string(debug_count_++) + ".png", 255*dst);
 }
 
 void LKSE3::trackFrame() {
   T_cur_ref_ = T_ref_cam_.inverse();
   x_.setZero();
 
+  //  if (batches_==0) {
+  //      LOG(INFO) << "Not enough data in the keyframe";
+  //      return;
+  //    }
   for (size_t lvl = pyramid_levels_; lvl != 0; --lvl) {
       for (size_t iter = 0; iter != max_iterations_; ++iter) {
-          updateTransformation((iter % batches_) * batch_size_, batch_size_,
-                               lvl - 1, iter);
+
+          if (batches_==0) {
+              updateTransformation(iter, keypoints_.size(),
+                                   lvl - 1, iter);
+            }
+          else {
+              updateTransformation((iter % batches_) * batch_size_, batch_size_,
+                                   lvl - 1, iter);
+            }
         }
     }
 }

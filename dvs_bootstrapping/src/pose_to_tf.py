@@ -67,7 +67,8 @@ if __name__ == '__main__':
 
     rospy.init_node('pose_to_tf')
     source_topic_name = rospy.get_param('~source_topic_name', '/dvs/pose')
-    tf_frame_name = rospy.get_param('dvs_bootstrap_frame_id', '/dvs_bootstrap')
+    # tf_frame_name = rospy.get_param('dvs_bootstrap_frame_id', '/dvs_bootstrap')
+    tf_frame_name = rospy.get_param('gt_frame_id', '/hand')
     tf_world_name = rospy.get_param('world_frame_id', '/world')
     relative_to_first_pose = rospy.get_param('~relative_to_first_pose', True)
 

@@ -9,7 +9,7 @@ catkin_simple(ALL_DEPS_REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 include_directories(${Boost_INCLUDE_DIRS})
 
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 4.2.0 REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 find_package(PCL 1.7 REQUIRED)

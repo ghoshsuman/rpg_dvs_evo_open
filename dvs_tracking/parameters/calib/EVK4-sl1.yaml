@@ -1,0 +1,30 @@
+image_width: 1280
+image_height: 720
+camera_name: EVK4-sl1
+camera_matrix:
+  rows: 3
+  cols: 3
+  data:
+    [1027.3853882494998, 0., 654.4970151553388,
+                   0., 1027.4873816074735, 414.1487968211323,
+                   0., 0., 1.
+    ]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data:
+    [-0.38639828047422115, 0.14624450167667552, -0.006894128615008057, -0.004035252573671935, 0.]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data:
+    [851.0114135742188, 0, 650.2189792538229,0,
+ 0, 974.0211181640625, 416.2393466051835,0,
+ 0, 0, 1,0]
+
+

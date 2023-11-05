@@ -54,6 +54,7 @@ void Tracker::postCameraLoaded() {
     cy_ = c_.cy();
     rect_ = cv::Rect(0, 0, width_, height_);
 
+    LOG(INFO) << "----------------------------" << CV_VERSION;
     float fov = 2. * std::atan(c_.fullResolution().width / 2. / c_.fx());
     LOG(INFO) << "Field of view: " << fov / M_PI * 180.;
 

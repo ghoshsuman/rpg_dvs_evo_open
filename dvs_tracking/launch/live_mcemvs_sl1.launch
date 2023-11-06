@@ -44,10 +44,10 @@
     <!-- Tracking module -->
     <node name="dvs_tracking" pkg="dvs_tracking" type="dvs_tracking_ros" required="true" output="screen">
         <param name="discard_events_when_idle" value="false"/> <!-- whether not to collect events when idle -->
-        <param name="batch_size" value="10000" /> <!-- batch-gradient descent batch size -->
+        <param name="batch_size" value="5000" /> <!-- batch-gradient descent batch size -->
         <param name="max_iterations" value="150" /> <!-- maximum number of iterations in the optimization -->
-        <param name="pyramid_levels" value="1" /> <!-- number of pyramid levels used in the KLT process -->
-        <param name="map_blur" value="3" /> <!-- sigma of the gaussian filter applied to the reprojected map -->
+        <param name="pyramid_levels" value="2" /> <!-- number of pyramid levels used in the KLT process -->
+        <param name="map_blur" value="5" /> <!-- sigma of the gaussian filter applied to the reprojected map -->
         <param name="noise_rate" value="10000" /> <!-- if events rate is below this value, the frame is skipped -->
         <param name="frame_size" value="50000" /> <!-- window of events considered -->
         <param name="step_size" value="150000" /> <!-- minimum number of new events to wait before a pose update -->
@@ -84,7 +84,7 @@
     </node>
     
     <node name="snakify" pkg="evo_utils" type="snakify.py" output="screen" >
-      <param name="length" value="100" />
+      <param name="length" value="10000" />
     </node>
     
     <node name="rqt_evo" pkg="rqt_evo" type="rqt_evo"></node> 

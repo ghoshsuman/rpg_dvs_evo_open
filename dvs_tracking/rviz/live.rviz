@@ -35,8 +35,8 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1
         - /TF1/Frames1
+        - /PointCloud21
       Splitter Ratio: 0.5
     Tree Height: 166
 Preferences:
@@ -76,7 +76,7 @@ Visualization Manager:
         dvs0:
           Value: true
         dvs_evo_raw:
-          Value: false
+          Value: true
         hand:
           Value: true
         world:
@@ -122,7 +122,7 @@ Visualization Manager:
       Color: 136; 138; 133
       Color Transformer: FlatColor
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Min Color: 0; 0; 0
@@ -131,13 +131,13 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
+      Size (m): 0.05000000074505806
       Style: Squares
       Topic: /dvs_mapping/pointcloud_global
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Class: rviz/Image
       Enabled: true
       Image Topic: /event_map_overlap
@@ -356,9 +356,9 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 136; 138; 133
+    Background Color: 255; 255; 255
     Default Light: true
-    Fixed Frame: hand
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:
@@ -382,7 +382,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.469744682312012
+      Distance: 61.05735397338867
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -390,17 +390,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.12023840844631195
-        Y: 0.726911187171936
-        Z: 0.3171095848083496
+        X: 9.857375144958496
+        Y: 16.781896591186523
+        Z: -0.5804956555366516
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.0497963428497314
+      Pitch: 0.23479600250720978
       Target Frame: <Fixed Frame>
-      Yaw: 3.1235978603363037
+      Yaw: 5.103599548339844
     Saved: ~
 Window Geometry:
   Bootstrap SVO:
@@ -441,4 +441,4 @@ Window Geometry:
     collapsed: true
   Width: 1455
   X: 246
-  Y: 112
+  Y: 27

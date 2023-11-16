@@ -9,6 +9,7 @@ from python_qt_binding.QtCore import QTimer, Slot
 #from evo_msgs.msg import Info
 from std_msgs.msg import String, Bool
 import subprocess
+from PyQt5.QtCore import Qt
 
 
 class EvoWidget(QWidget):
@@ -53,6 +54,7 @@ class EvoWidget(QWidget):
         if not evo_namespace:
             evo_namespace = 'evo'
 
+        self.button_start.keyPressEvent = self.keyPressEvent
         self._evo_namespace = evo_namespace
         self.topic_line_edit.textChanged.connect(self._on_topic_changed)
         self.register(evo_namespace)
@@ -166,3 +168,18 @@ class EvoWidget(QWidget):
         if self._publisher is None:
             return
         self._publisher.publish(String(cmd))
+
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_R:
+            self.on_start_button_pressed()
+        if event.key() == Qt.Key_T:
+            self.on_switch_button_pressed()
+        if event.key() == Qt.Key_M:
+            self.on_map_expansion_changed()
+        if event.key() == Qt.Key_C:
+            self.on_copilot_state_changed()
+        if event.key() == Qt.Key_A:
+            subprocess.call("killall rovio_node", shell=True)
+            subprocess.Popen(["roslaunch", "rovio", "rovio_davis_cvpr_live.launch"])
+        print(event)

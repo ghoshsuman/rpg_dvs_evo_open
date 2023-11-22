@@ -10,7 +10,7 @@ Panels:
         - /EVO trajectory1
         - /Events1
       Splitter Ratio: 0.5
-    Tree Height: 441
+    Tree Height: 443
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -28,7 +28,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: local_map
+    SyncSource: DVS left
   - Class: rviz/Displays
     Help Height: 70
     Name: Displays
@@ -37,9 +37,11 @@ Panels:
         - /Global Options1
         - /TF1
         - /TF1/Frames1
-        - /EVO trajectory1
+        - /Tracking1
+        - /DVS left1
+        - /Commands1
       Splitter Ratio: 0.5
-    Tree Height: 98
+    Tree Height: 70
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -74,10 +76,6 @@ Visualization Manager:
         All Enabled: false
         camera0:
           Value: true
-        dvs0:
-          Value: true
-        dvs_evo_raw:
-          Value: false
         imu:
           Value: false
         world:
@@ -90,10 +88,6 @@ Visualization Manager:
       Show Names: true
       Tree:
         world:
-          dvs0:
-            {}
-          dvs_evo_raw:
-            {}
           imu:
             camera0:
               {}
@@ -120,7 +114,7 @@ Visualization Manager:
       Axis: Z
       Channel Name: intensity
       Class: rviz/PointCloud2
-      Color: 136; 138; 133
+      Color: 98; 100; 96
       Color Transformer: FlatColor
       Decay Time: 0
       Enabled: false
@@ -151,24 +145,12 @@ Visualization Manager:
       Transport Hint: raw
       Unreliable: false
       Value: true
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /dsi/confidence
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: DSI
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /dvs/camera_marker
       Name: EVO Camera
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -197,30 +179,6 @@ Visualization Manager:
       Value: false
     - Class: rviz/Image
       Enabled: false
-      Image Topic: /dvs_reconstruction/image
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image reconstruction
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /svo/image/0
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: SVO
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
-    - Class: rviz/Image
-      Enabled: false
       Image Topic: /dvs_rendering
       Max Value: 1
       Median window: 5
@@ -232,41 +190,17 @@ Visualization Manager:
       Unreliable: false
       Value: false
     - Class: rviz/Image
-      Enabled: false
-      Image Topic: /only_events/image_raw
+      Enabled: true
+      Image Topic: /dvs_rendering_left
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: Image
+      Name: DVS left
       Normalize Range: true
       Queue Size: 2
       Transport Hint: raw
       Unreliable: false
-      Value: false
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /only_events/image_raw
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Events frame
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /dvs_reconstruction/depthmap
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Dense depthmap
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
+      Value: true
     - Class: rviz/Image
       Enabled: true
       Image Topic: /dvs_mapping/depthmap
@@ -279,54 +213,6 @@ Visualization Manager:
       Transport Hint: raw
       Unreliable: false
       Value: true
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /dvs/image_raw
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /dvs_rendering
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /dvs_undistorted
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /dvs/image_raw
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: DAVIS Frame
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -356,36 +242,36 @@ Visualization Manager:
       Use rainbow: true
       Value: true
     - Class: rviz/Image
-      Enabled: false
-      Image Topic: /projected_pointcloud
+      Enabled: true
+      Image Topic: /dvs_rendering_right
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: Image
+      Name: DVS right
       Normalize Range: true
       Queue Size: 2
       Transport Hint: raw
       Unreliable: false
-      Value: false
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: ""
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Projected_pointcloud
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
+      Value: true
     - Class: rviz/Image
       Enabled: true
       Image Topic: /projected_pointcloud
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: projected_pointcloud
+      Name: Projected pointcloud
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /evo/commands
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Commands
       Normalize Range: true
       Queue Size: 2
       Transport Hint: raw
@@ -393,7 +279,7 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 85; 87; 83
+    Background Color: 255; 255; 255
     Default Light: true
     Fixed Frame: world
     Frame Rate: 30
@@ -419,53 +305,45 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 12.573486328125
+      Distance: 4.405523300170898
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Field of View: 0.7853981852531433
+      Field of View: 0.800000011920929
       Focal Point:
-        X: 6.386974811553955
-        Y: 3.6200804710388184
-        Z: -5.94650936126709
+        X: 1.083579421043396
+        Y: 0.7019340395927429
+        Z: -0.3937094807624817
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5697956681251526
-      Target Frame: <Fixed Frame>
-      Yaw: 3.778594732284546
+      Pitch: 0.995203971862793
+      Target Frame: world
+      Yaw: 5.254567623138428
     Saved: ~
 Window Geometry:
   Bootstrap SVO:
     collapsed: false
-  DAVIS Frame:
+  Commands:
     collapsed: false
-  DSI:
+  DVS left:
     collapsed: false
-  Dense depthmap:
+  DVS right:
     collapsed: false
   Displays:
     collapsed: false
   Events:
     collapsed: false
-  Events frame:
-    collapsed: false
-  Height: 1023
+  Height: 1359
   Hide Left Dock: false
-  Hide Right Dock: true
-  Image:
+  Hide Right Dock: false
+  Projected pointcloud:
     collapsed: false
-  Image reconstruction:
-    collapsed: false
-  Projected_pointcloud:
-    collapsed: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000156000003a5fc0200000017fb000000100054007200610063006b0069006e0067010000003d000000b20000001600fffffffb0000001e005300700061007200730065002000640065007000740068006d0061007001000000f5000001310000001600fffffffb0000001200530065006c0065006300740069006f006e000000003d000002b00000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000280049006d0061006700650020007200650063006f006e0073007400720075006300740069006f006e00000000f5000000b30000001600fffffffb0000000c004500760065006e00740073000000003d000001730000001600fffffffb000000100044006900730070006c006100790073000000003d000003a5000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001a0042006f006f007400730074007200610070002000530056004f0000000161000001320000001600fffffffb0000000a0049006d006100670065000000003d000002360000001600fffffffb0000001c00440065006e00730065002000640065007000740068006d00610070000000003d0000012e0000001600fffffffb0000000600530056004f0000000333000000af0000001600fffffffb0000000a0049006d00610067006500000001c2000000b10000001600fffffffb0000000a0049006d00610067006500000001c2000000b10000001600fffffffb0000000a0049006d0061006700650000000145000000770000001600fffffffb000000100044006900730070006c006100790073010000022c000000e5000000c900fffffffb0000000a0049006d0061006700650000000317000000cb0000001600fffffffb0000002800500072006f006a00650063007400650064005f0070006f0069006e00740063006c006f007500640000000317000000cb0000001600fffffffb0000002800700072006f006a00650063007400650064005f0070006f0069006e00740063006c006f007500640100000317000000cb0000001600ffffff000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000003da000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b2000000000000000000000002000005af000000c9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004df000001a0fc0100000008fb00000018004500760065006e007400730020006600720061006d006500000000d6000001850000008e00fffffffb00000016004400410056004900530020004600720061006d006500000001a2000000c60000008c00fffffffb0000000a0049006d00610067006501000000000000021c0000000000000000fb000000060044005300490000000283000002570000004b00fffffffb0000000a0049006d00610067006501000004ca000002750000000000000000fb0000000a0049006d00610067006501000004c9000002760000000000000000fb0000000800540069006d00650000000000000003ce0000041800fffffffb0000000800540069006d0065010000000000000450000000000000000000000453000003a500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
-  SVO:
-    collapsed: false
+  QMainWindow State: 000000ff00000000fd00000004000000000000023d000004f9fc0200000015fb000000100054007200610063006b0069006e0067010000003b0000019f0000001600fffffffc000001e0000001a20000001600fffffffa000000010100000002fb0000000a0049006d0061006700650000000000ffffffff0000000000000000fb0000001e005300700061007200730065002000640065007000740068006d006100700100000000000001560000009f00fffffffb0000001200530065006c0065006300740069006f006e000000003d000002b00000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000280049006d0061006700650020007200650063006f006e0073007400720075006300740069006f006e00000000f5000000b30000000000000000fb0000000c004500760065006e00740073000000003d000001730000001600fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001a0042006f006f007400730074007200610070002000530056004f0000000161000001320000001600fffffffb0000001c00440065006e00730065002000640065007000740068006d00610070000000003d0000012e0000000000000000fb0000000600530056004f0000000333000000af0000000000000000fb0000000a0049006d00610067006500000001c2000000b10000000000000000fb0000000a0049006d00610067006500000001c2000000b10000000000000000fb0000000a0049006d0061006700650000000145000000770000000000000000fb000000100044006900730070006c006100790073020000116d000000580000015800000548fb0000000a0049006d0061006700650000000317000000cb0000000000000000fb0000002800500072006f006a00650063007400650064005f0070006f0069006e00740063006c006f007500640000000317000000cb0000000000000000fb0000002800500072006f006a0065006300740065006400200070006f0069006e00740063006c006f007500640100000388000001ac0000001600ffffff00000001000001e1000004f9fc0200000008fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fc0000003b000000e2000000e20100001afa000000000100000002fb000000100044006900730070006c0061007900730100000000ffffffff0000015600fffffffb0000000a00560069006500770073010000059b0000010f0000010000fffffffb000000100044005600530020006c0065006600740100000123000001200000001600fffffffb0000001200440056005300200072006900670068007401000002490000012a0000001600fffffffb000000100043006f006d006d0061006e006400730100000379000001bb0000001600fffffffb0000000a0049006d00610067006501000003b1000001830000000000000000fb0000000a0049006d00610067006501000003ab000001890000000000000000fb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000a00000000c9fc0100000002fc0000000000000a000000000000fffffffa000000000200000002fb0000000a0049006d006100670065000000003b000000c90000000000000000fb0000000a0049006d0061006700650000000000ffffffff0000000000000000fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004df000001a0fc0100000008fb00000018004500760065006e007400730020006600720061006d006500000000d6000001850000000000000000fb00000016004400410056004900530020004600720061006d006500000001a2000000c60000000000000000fb0000000a0049006d00610067006501000000000000021c0000000000000000fb000000060044005300490000000283000002570000000000000000fb0000000a0049006d00610067006501000004ca000002750000000000000000fb0000000a0049006d00610067006501000004c9000002760000000000000000fb0000000800540069006d00650000000000000003ce0000035c00fffffffb0000000800540069006d00650100000000000004500000000000000000000005d6000004f900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Sparse depthmap:
@@ -477,9 +355,7 @@ Window Geometry:
   Tracking:
     collapsed: false
   Views:
-    collapsed: true
-  Width: 1455
-  X: 246
-  Y: 27
-  projected_pointcloud:
     collapsed: false
+  Width: 2560
+  X: 2560
+  Y: 0

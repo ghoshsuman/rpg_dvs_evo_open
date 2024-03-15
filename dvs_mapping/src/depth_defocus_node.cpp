@@ -878,7 +878,7 @@ void DepthFromDefocusNode::publishDepthmap(const cv::Mat& depth,
 
     cv::Mat img = 255.f * (depth - min) / (max - min);
     img.convertTo(img, CV_8U);
-    cv::applyColorMap(img, img, cv::COLORMAP_JET);
+    cv::applyColorMap(img, img, cv::COLORMAP_RAINBOW);
     img.setTo(255, 1 - mask);
     //  cv::GaussianBlur(img, img, cv::Size(3,3), 0);
 

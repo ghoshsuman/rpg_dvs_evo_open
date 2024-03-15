@@ -116,6 +116,7 @@ Tracker::Tracker(ros::NodeHandle& nh, ros::NodeHandle nh_private)
 
     // Load camera calibration
     c_ = evo_utils::camera::loadPinholeCamera(nh);
+    LOG(INFO) << "Distortion coeffs: " << c_.distortionCoeffs();
     postCameraLoaded();
 
     // Setup Subscribers
@@ -294,7 +295,7 @@ void Tracker::publishMapOverlapThread() {
     if (!cmap.data) {
         cv::Mat gray(256, 1, CV_8U);
         for (int i = 0; i != gray.rows; ++i) gray.at<uchar>(i) = i;
-        cv::applyColorMap(gray, cmap, cv::COLORMAP_RAINBOW);
+        cv::applyColorMap(gray, cmap, cv::COLORMAP_JET);
     }
 
     static image_transport::Publisher pub =
@@ -466,6 +467,7 @@ void Tracker::estimateTrajectory() {
             cur_ev_ += step_size_;
             continue;
         }
+        LOG(INFO) << "Event rate: "<< event_rate_;
 
         static size_t events_processed = 0, poses_generated = 0;
 #ifdef TRACKING_PERF

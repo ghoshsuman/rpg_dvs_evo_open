@@ -131,6 +131,7 @@ void LKSE3::precomputeReferenceFrame() {
   //  batch_size_ = keypoints_.size();
 
   batches_ = std::ceil(keypoints_.size() / batch_size_);
+  LOG(INFO) << "Total size of keypoints before being broken into batches: "<<keypoints_.size();
 
   //    cv::imshow("ref img", ref_img_);
   //    cv::waitKey(10);
@@ -140,7 +141,7 @@ void LKSE3::updateTransformation(const int offset, const int N,
                                  size_t pyr_lvl, size_t iter) {
   static Eigen::MatrixXf H;
   static Eigen::VectorXf Jres, dx;
-  //  LOG(INFO) << "HEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLOOOOOOOOO";
+//    LOG(INFO) << "#keypoints: " << keypoints_.size();
   //  cv::Mat1f debug_img(new_img_.rows, new_img_.cols, 0.0f);
 
   const cv::Mat &img = pyr_new_[pyr_lvl];
@@ -235,6 +236,7 @@ void LKSE3::trackFrame() {
 
 void LKSE3::drawEvents(EventQueue::iterator ev_first,
                        EventQueue::iterator ev_last, cv::Mat &out) {
+//    LOG(INFO) << c_.fullProjectionMatrix();
   // Precompute rectification table
   static std::vector<cv::Point> points;
   static std::vector<Eigen::Vector4f> weights;

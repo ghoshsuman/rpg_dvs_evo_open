@@ -1,5 +1,5 @@
 <launch>
-    <arg name="auto_trigger" default="true"/> <!-- whether to automatic startup the pipeline at the first data received -->
+    <arg name="auto_trigger" default="false"/> <!-- whether to automatic startup the pipeline at the first data received -->
     <arg name="bootstrap_image_topic" default="/davis_left/image_raw" /> <!-- dvs to use standard frames (relevant for svo-based bootstrapping )-->
     <arg name="events_topic" default="/davis_left/events" /> <!-- topic used by your sensor to output events -->
 
@@ -43,7 +43,7 @@
     <!-- Tracking module -->
     <node name="dvs_tracking" pkg="dvs_tracking" type="dvs_tracking_ros" required="true" output="screen">
         <param name="discard_events_when_idle" value="false"/> <!-- whether not to collect events when idle -->
-        <param name="batch_size" value="1000" /> <!-- batch-gradient descent batch size -->
+        <param name="batch_size" value="200" /> <!-- batch-gradient descent batch size -->
         <param name="max_iterations" value="150" /> <!-- maximum number of iterations in the optimization -->
         <param name="pyramid_levels" value="2" /> <!-- number of pyramid levels used in the KLT process -->
         <param name="map_blur" value="5" /> <!-- sigma of the gaussian filter applied to the reprojected map -->
@@ -86,11 +86,6 @@
     <node name="rqt_evo" pkg="rqt_evo" type="rqt_evo"></node> 
     
     <!-- visualization -->
-    <node name="dvs_renderer_left" pkg="dvs_renderer" type="dvs_renderer" output="screen">
-        <param name="display_method" value="red-blue"/>
-        <remap from="events" to="$(arg events_topic)" />
-        <remap from="dvs_rendering" to="dvs_rendering" />
-    </node>
     <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/eccv18.rviz" />
 
 

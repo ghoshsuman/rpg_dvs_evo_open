@@ -28,7 +28,7 @@
 #include "evo_utils/camera.hpp"
 #include "evo_utils/main.hpp"
 #include "rpg_common_ros/params_helper.hpp"
-
+// #define TRACKING_PERF
 using Transformation = kindr::minimal::QuatTransformation;
 using Quaternion = kindr::minimal::RotationQuaternion;
 
@@ -467,7 +467,7 @@ void Tracker::estimateTrajectory() {
             cur_ev_ += step_size_;
             continue;
         }
-        LOG(INFO) << "Event rate: "<< event_rate_;
+//        LOG(INFO) << "Event rate: "<< event_rate_;
 
         static size_t events_processed = 0, poses_generated = 0;
 #ifdef TRACKING_PERF
@@ -505,8 +505,7 @@ void Tracker::estimateTrajectory() {
 
         T_ref_cam_ *= SE3::exp(-x_).matrix();
 
-        publishTF();
-        cur_ev_ += step_size_;
+        publishTF();        cur_ev_ += step_size_;
 
 #ifdef TRACKING_PERF
         {

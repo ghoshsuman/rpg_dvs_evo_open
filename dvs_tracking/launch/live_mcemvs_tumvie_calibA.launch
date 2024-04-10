@@ -2,6 +2,7 @@
     <arg name="auto_trigger" default="true"/> <!-- whether to automatic startup the pipeline at the first data received -->
     <arg name="bootstrap_image_topic" default="/davis/left/image_raw" /> <!-- dvs to use standard frames (relevant for svo-based bootstrapping )-->
     <arg name="events_topic" default="/dvs/left/events" /> <!-- topic used by your sensor to output events -->
+    <arg name="events_topic_right" default="/dvs/right/events" />
 
     <arg name="camera_name" default="tumvie_calibA" /> <!-- name of the camera and of the calibration file -->
     <param name="camera_name" value="$(arg camera_name)" />
@@ -90,17 +91,21 @@
     <node name="rqt_evo" pkg="rqt_evo" type="rqt_evo"></node> 
     
     <!-- visualization -->
-    <node name="dvs_renderer_left" pkg="dvs_renderer" type="dvs_renderer" output="screen">
-        <param name="display_method" value="red-blue"/>
-        <remap from="events" to="$(arg events_topic)" />
-        <remap from="dvs_rendering" to="dvs_rendering_left" />
+          <node name="dvs_renderer_left" pkg="dvs_renderer_advanced" type="dvs_renderer_advanced">
+    <param name="color_mode" value="red-blue"/>
+    <param name="background_color" value="1"/>
+    <remap from="events" to="$(arg events_topic)" />
+    <remap from="dvs_rendering" to="dvs_rendering_left" />
     </node>
-    <!--<node name="dvs_renderer_right" pkg="dvs_renderer" type="dvs_renderer" output="screen">
-        <param name="display_method" value="red-blue"/>
-        <remap from="events" to="$(arg events_topic)" />
-        <remap from="dvs_rendering" to="dvs_rendering" />
-    </node>-->
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/tumvie.rviz" />
+    
+          <node name="dvs_renderer_right" pkg="dvs_renderer_advanced" type="dvs_renderer_advanced">
+    <param name="color_mode" value="red-blue"/>
+    <param name="background_color" value="1"/>
+    <remap from="events" to="$(arg events_topic_right)" />
+    <remap from="dvs_rendering" to="dvs_rendering_right" />
+    </node>
+
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/iros.rviz" />
 
 
     

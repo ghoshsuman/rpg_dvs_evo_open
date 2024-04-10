@@ -100,7 +100,7 @@
         <remap from="events" to="$(arg events_topic)" />
         <remap from="dvs_rendering" to="dvs_rendering" />
     </node>-->
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/tumvie.rviz" />
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/iros.rviz" />
 
 
     

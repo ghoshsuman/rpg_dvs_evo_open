@@ -499,8 +499,17 @@ void Tracker::estimateTrajectory() {
 
         drawEvents(events_.begin() + cur_ev_, events_.begin() + frame_end,
                    new_img_);
+#ifdef TRACKING_PERF
+        {
+            TIMER_STOP(t1, t2, duration);
+            time_elapsed += duration;
+            LOG(INFO) << "Forming event image required: " << duration << "ms";
+
+            TIMER_START(t1);
+        }
+#endif
         cv::buildPyramid(new_img_, pyr_new_, pyramid_levels_);
-//        LOG(INFO) << "*****************Collecting events from "<< events_[cur_ev_].ts << " - "<< events_[frame_end].ts;
+        //LOG(INFO) << "*****************Collecting events from "<< events_[cur_ev_].ts << " - "<< events_[frame_end].ts;
         trackFrame();
 
         T_ref_cam_ *= SE3::exp(-x_).matrix();
@@ -511,7 +520,7 @@ void Tracker::estimateTrajectory() {
         {
             TIMER_STOP(t1, t2, duration);
             time_elapsed += duration;
-            LOG(INFO) << "Tracking trajectory required: " << duration << "ms";
+            LOG(INFO) << "Optimization required: " << duration << "ms";
         }
 #endif
 

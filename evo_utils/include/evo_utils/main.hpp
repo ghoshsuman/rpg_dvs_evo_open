@@ -45,4 +45,4 @@
 #define TIMER_STOP(t1, t2, duration)                     \
     auto t2 = std::chrono::high_resolution_clock::now(); \
     auto duration =                                      \
-        std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count()
+        std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count()/1000.f

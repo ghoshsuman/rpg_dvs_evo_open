@@ -126,6 +126,7 @@ class EvoWidget(QWidget):
         """
         print('START/RESET')
         self.send_command('reset')
+        # self.send_command('switch')
 
     def on_update_button_pressed(self):
         """

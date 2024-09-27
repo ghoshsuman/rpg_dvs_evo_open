@@ -1,0 +1,32 @@
+image_width: 1280
+image_height: 720
+camera_name: tubrip
+camera_matrix:
+  rows: 3
+  cols: 3
+  data:
+    [1247.127857513328, 0., 614.4018620460853,
+                   0., 1243.2579256534093, 367.2323168311548,
+                   0., 0., 1.
+    ]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 4
+  data:
+    [-0.2760196783556086, 0.14794388053346436, 0.00020965924879978146, 0.0006411028643916014]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data:
+    [1247.127857513328, 0., 614.4018620460853, 0,
+                   0., 1243.2579256534093, 367.2323168311548, 0,
+                   0., 0., 1., 0.
+    ]
+
+
+

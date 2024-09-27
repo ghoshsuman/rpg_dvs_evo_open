@@ -35,7 +35,7 @@
 
         <param name="visibility_threshold" value="0.5" /> <!-- visibility of the map below which the update is triggered -->
         <param name="coverage_threshold" value="0.2" /> <!-- minimum amount of pixels covered by reprojected map threshold -->
-        <param name="baseline_threshold" value="0.1" /> <!-- baseline / mean depth ratio above which the update is triggered -->
+        <param name="baseline_threshold" value="0.1" /> <!-- baseline / mean depth ration above which the update is triggered -->
         <param name="rate" value="1" /> <!-- rate at which the node checks whether an expansion is needed -->
         <param name="number_of_initial_maps_to_skip" value="0"/> <!-- starts checking updates conditions after this number of maps -->
     </node>
@@ -49,7 +49,7 @@
         <param name="map_blur" value="5" /> <!-- sigma of the gaussian filter applied to the reprojected map -->
         <param name="noise_rate" value="1000" /> <!-- if events rate is below this value, the frame is skipped -->
         <param name="frame_size" value="10000" /> <!-- window of events considered -->
-        <param name="step_size" value="10000" /> <!-- minimum number of new events to wait before a pose update -->
+        <param name="step_size" value="15000" /> <!-- minimum number of new events to wait before a pose update -->
         <param name="max_event_rate" value="8000000" /> <!-- events processed are randomly sampled so that the rate is below this value -->
         <param name="pose_mean_filter_size" value="5" /> <!-- median filter size (poses are median filtered) -->
         <param name="events_per_kf" value="200000" /> <!-- events required for a new keyframe -->
@@ -80,27 +80,13 @@
     </node>
     
     <node name="snakify" pkg="evo_utils" type="snakify.py" output="screen" >
-      <param name="length" value="100" />
+      <param name="length" value="1000" />
     </node>
     
     <node name="rqt_evo" pkg="rqt_evo" type="rqt_evo"></node> 
     
     <!-- visualization -->
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/demo.rviz" />
-    
-          <node name="dvs_renderer_left" pkg="dvs_renderer_advanced" type="dvs_renderer_advanced">
-    <param name="color_mode" value="red-blue"/>
-    <param name="background_color" value="1"/>
-    <remap from="events" to="/davis_left/events" />
-    <remap from="dvs_rendering" to="dvs_rendering_left" />
-    </node>
-    
-          <node name="dvs_renderer_right" pkg="dvs_renderer_advanced" type="dvs_renderer_advanced">
-    <param name="color_mode" value="red-blue"/>
-    <param name="background_color" value="1"/>
-    <remap from="events" to="/davis_right/events" />
-    <remap from="dvs_rendering" to="dvs_rendering_right" />
-    </node>
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/eccv18.rviz" />
 
 
     

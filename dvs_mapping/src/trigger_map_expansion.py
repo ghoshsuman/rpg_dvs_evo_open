@@ -55,7 +55,7 @@ class TriggerMapExpansion:
         self._visibility_th = rospy.get_param('~visibility_threshold', .75)
         self._coverage_th = rospy.get_param('~coverage_threshold', .3)
         self._baseline_th = rospy.get_param('~baseline_threshold', .1)
-        self._dvs_frame_id = rospy.get_param('dvs_frame_id', 'dvs_evo')
+        self._dvs_frame_id = rospy.get_param('dvs_bootstrap_frame_id', 'dvs_evo')
         self._world_frame_id = rospy.get_param('world_frame_id', 'world')
         self._map_to_skip = rospy.get_param(
             'number_of_initial_maps_to_skip', 0)

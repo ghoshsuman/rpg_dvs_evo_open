@@ -130,6 +130,7 @@ Tracker::Tracker(ros::NodeHandle& nh, ros::NodeHandle nh_private)
 
     // Setup Publishers
     poses_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("evo/pose", 0);
+    remote_pub_ = nh_.advertise<const std_msgs::String>("remote_key", 0);
 
 #ifdef TRACKER_DEBUG_REFERENCE_IMAGE
     std::thread map_overlap(&Tracker::publishMapOverlapThread, this);
@@ -166,7 +167,16 @@ void Tracker::remoteCallback(const std_msgs::String::ConstPtr& msg) {
     if (cmd == "switch")
         initialize(ros::Time(0));
     else if (cmd == "reset")
+    {
         reset();
+        std_msgs::String cmd_msg;
+        cmd_msg.data = "switch";
+        remote_pub_.publish(cmd_msg);
+        cmd_msg.data = "update";
+        remote_pub_.publish(cmd_msg);
+//        cmd = "switch";
+//        initialize(ros::Time(0));
+    }
     else if (cmd == "bootstrap")
         auto_trigger_ = true;
 }

@@ -66,6 +66,7 @@ class Tracker : public LKSE3 {
 
     ros::Publisher poses_pub_;  ///< @see publishPose
                                 ///< topic: "evo/pose"
+    ros::Publisher remote_pub_;
 
     std::string frame_id_;
     std::string world_frame_id_;

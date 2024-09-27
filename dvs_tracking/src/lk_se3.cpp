@@ -131,7 +131,7 @@ void LKSE3::precomputeReferenceFrame() {
   //  batch_size_ = keypoints_.size();
 
   batches_ = std::ceil(keypoints_.size() / batch_size_);
-  LOG(INFO) << "Total size of keypoints before being broken into batches: "<<keypoints_.size();
+ // LOG(INFO) << "Total size of keypoints before being broken into batches: "<<keypoints_.size();
 
   //    cv::imshow("ref img", ref_img_);
   //    cv::waitKey(10);
